@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 import sys, re
 
-with open(f'{sys.path[0]}/p3.txt', 'r') as f:
+with open(f'{sys.path[0]}/day2.txt', 'r') as f:
     lines = [line.strip() for line in f.readlines()]
 
 valid = 0
@@ -10,13 +10,13 @@ pattern = '(\d+)-(\d+) (\w): (\w+)'
 for line in lines:
     match = re.search(pattern, line)
 
-    imin = int(match.group(1))
-    imax = int(match.group(2))
+    pos1 = int(match.group(1))
+    pos2 = int(match.group(2))
     letter = match.group(3)
     password = match.group(4)
-    occurences = password.count(letter)
 
-    if occurences >= imin and occurences <= imax:
+    letters = password[pos1-1] + password[pos2-1]
+    if letters.count(letter) == 1:
         valid += 1
 
 print(f'Answer: {valid}')
